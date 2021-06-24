@@ -1,0 +1,63 @@
+<h1 style="text-align: center;">Տեղադրման մեթոդ</h1>
+<div class="inputs" *ngIf="!saveIsClicked" >
+  <div class="input-and-label">
+    <label class="label">Բազմություն</label>
+    <input type="text" [(ngModel)]="numbersString" class="input">
+  </div>
+  <button type="button"
+          (click)="saveOnClick()"
+          class="button7"> Տեսնել </button>
+</div>
+
+<div class="inputs" *ngIf="newValuesIsVisible" >
+  <button type="button"
+          (click)="newValuesIsClicked()"
+          class="button7"> Մուտքագրել նոր բազմություն </button>
+</div>
+
+<div *ngIf="saveIsClicked">
+  <div style="display: flex;">
+    <div class="view-child red"></div>
+    <span style="margin-left: 5px">Ընթացիկ ինդեքս</span>
+  </div>
+  <div style="display: flex;">
+    <div class="view-child green"></div>
+    <span style="margin-left: 5px">Նախորդ ինդեքս</span>
+  </div>
+</div>
+
+<div class="array-and-button">
+  <div class="array-main">
+    <div *ngFor="let item of array; let idx = index">
+      <div class="array-child"
+           [ngClass]="currentIndex===idx?'red':currentIndex-1 === idx && currentIndex!= -1 ?'green':''">
+        <span>{{item}}</span>
+      </div>
+      <div style="text-align: center; font-size: 14px; color: gray;">
+        <span>{{idx}}</span>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="numberNotFound"
+       class="finish"
+       style="color: red; margin-bottom: 7px">
+    <span > մուտքագրված թիվը բազմության մեջ չկա։ </span>
+  </div>
+  <button type="button"
+          (click)="startOnClick()"
+          *ngIf="!finished && saveIsClicked && !timeToSwap"
+          class="button7"> {{currentIndex===-1?'Սկսել':'Հաջորդ քայլ'}} </button>
+  <button type="button"
+          (click)="swap()"
+          *ngIf="timeToSwap"
+          class="button7 swap-color"> Տեղափոխել </button>
+  <img *ngIf="timeToSwap" src="assets/swap.png" width="20">
+  <div *ngIf="finished" class="finish-and-restart">
+    <span class="finish" *ngIf="!numberNotFound"> Ավարտ </span>
+    <span class="finish" *ngIf="!numberNotFound"> Ինդեքսի տեղաշարժերի քանակ՝ {{indexNumber}}</span>
+    <span class="finish" *ngIf="!numberNotFound"> Տեղափոխությունների քանակ՝ {{swapNumber}} </span>
+  </div>
+
+  <p style="text-align: center;">
+    Ըստ Տեղադրման մեթոդի վերցնում ենք բազմության երկրորդ էլեմենտը, համեմատում ենք այն իր նախորդ էլեմենտի հետ, եթե հայտնաբերում ենք որ հերթական էլեմենտը ավելի փոքր է, քան իր նախորդը, ապա տեղափոխում ենք  նրան դեպի հետ այնքան ժամանակ, քանի դեռ այն իր տեղը չի գտել, եթե ոչ թողնում ենք նույնը։ Նույն համեմատման գործողությունը կատարում ենք այդ մնացած թվերի հետ և շարունակենք այս շղթան բազմության բոլոր ինդեքսների համար։ </p>
+</div>

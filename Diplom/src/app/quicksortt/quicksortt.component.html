@@ -1,0 +1,66 @@
+<h1 style="text-align: center;">Արագ կարգավորման մեթոդ</h1>
+<div class="inputs" *ngIf="!saveIsClicked" >
+  <div class="input-and-label">
+    <label class="label">Բազմություն</label>
+    <input type="text" [(ngModel)]="numbersString" class="input">
+  </div>
+  <button type="button"
+          (click)="saveOnClick()"
+          class="button7"> Տեսնել </button>
+</div>
+<div>
+</div>
+<div class="inputs" *ngIf="newValuesIsVisible" >
+  <button type="button"
+          (click)="newValuesIsClicked()"
+          class="button7"> Մուտքագրել նոր բազմություն </button>
+</div>
+
+<div *ngIf="saveIsClicked">
+  <div style="display: flex;">
+    <div class="view-child red"></div>
+    <span style="margin-left: 5px">Սկզբի ինդեքս</span>
+  </div>
+  <div style="display: flex;">
+    <div class="view-child green"></div>
+    <span style="margin-left: 5px">Վերջին ինդեքս</span>
+  </div>
+  <div style="display: flex;">
+    <div class="view-child yellow"></div>
+    <span style="margin-left: 5px">Մեջտեղի թիվ</span>
+  </div>
+</div>
+
+<div class="array-and-button">
+  <div class="array-main">
+    <div *ngFor="let item of array; let idx = index">
+      <div class="array-child"
+           [ngClass]="i===idx?'red':j === idx ?'green':k===idx?'yellow':''">
+        <span>{{item}}</span>
+      </div>
+      <div style="text-align: center; font-size: 14px; color: gray;">
+        <span>{{idx}}</span>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="numberNotFound"
+       class="finish"
+       style="color: red; margin-bottom: 7px">
+    <span > մուտքագրված թիվը բազմության մեջ չկա։ </span>
+  </div>
+  <button type="button"
+          (click)="startOnClick()"
+          *ngIf="!finished && !timeToSwap && saveIsClicked"
+          class="button7"> {{i===-1 && j===-1?'Սկսել':'Հաջորդ քայլ'}} </button>
+  <button type="button"
+          (click)="swap()"
+          *ngIf="timeToSwap"
+          class="button7 swap-color"> Տեղափոխել </button>
+  <img *ngIf="timeToSwap" src="assets/swap.png" width="20">
+  <div *ngIf="finished" class="finish-and-restart">
+    <span class="finish" *ngIf="!numberNotFound"> Ավարտ </span>
+  </div>
+  <p style="text-align: center;">
+    Ըստ Արագ կարգավորման մեթոդի սկզբում ընտրում ենք բազմության մեջտեղի թիվը կամ նրան մոտ գտնվող որևէ թիվ։ Ընտրված թվի ձախ կողմում հավաքում ենք այդ թվից փոքր թվերը, իսկ աջ կողմում մեծ թվերը։ Արդյունքում կարելի է ասել որ ընտրված թիվը բազմության մեջ զբաղեցնում է իր տեղը, և հետևաբար անհրաժեշտություն է առաջանում կարգավորել միայն ընտրված թվից ձախ և աջ կողմերում գտնվող երկու փոքր բազմությունները։ Առաջացած բազմությունների կարգավորման համար կիրառում ենք նույն սկզբունքը և շարունակում ենք այն այնքան ժամանակ, մինչև որ փոքր բազմություններից յուրաքանչյուրում կմնա մեկական էլեմենտ։
+  </p>
+</div>

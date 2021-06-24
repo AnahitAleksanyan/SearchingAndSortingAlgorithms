@@ -1,0 +1,52 @@
+<div class="main">
+  <div [class.main-content-second]="quicksortIsClicked || bubbleSortIsClicked
+               || insertionSortIsClicked || linearSearchIsClicked
+                || binarySearchIsClicked"
+       [class.main-content]="!quicksortIsClicked && !bubbleSortIsClicked
+               && !insertionSortIsClicked && !linearSearchIsClicked
+                && !binarySearchIsClicked">
+    <div style="width: 100%">
+      <img src="assets/logo.png" width="50" height="50">
+    </div>
+    <div>
+      <button class="button7"
+              (click)="homeOnClick()"
+              *ngIf="quicksortIsClicked || bubbleSortIsClicked
+               || insertionSortIsClicked || linearSearchIsClicked
+                || binarySearchIsClicked"><img src="assets/home3.png" width="20" style="color: white"/></button>
+    </div>
+    <div>
+      <div *ngIf="!sortingIsClicked && !searchingIsClicked">
+        <h1 style="text-align: center">Ընտրեք նախընտրելի ալգոլիրթմը</h1>
+        <div style="text-align: center">
+          <button type="button" (click)="searchingOnClick()" class="button7">Որոնում</button>
+          <button type="button" (click)="sortingOnClick()" class="button7">Կարգավորում</button>
+        </div>
+      </div>
+      <div *ngIf="searchingIsClicked && !linearSearchIsClicked && !binarySearchIsClicked" style="display: flex;flex-wrap: wrap;justify-content: center">
+        <h1 style="text-align: center">Ընտրեք ալգորիթմի տեսակը</h1>
+        <div style="text-align: center">
+          <button type="button" (click)="linearSearchOnClick()" class="button7">Գծային որոնում</button>
+          <button type="button" (click)="binarySearchOnClick()" class="button7">Երկուական որոնում</button>
+        </div>
+      </div>
+
+      <div *ngIf="sortingIsClicked && !bubbleSortIsClicked && !insertionSortIsClicked && !quicksortIsClicked"
+           style="display: flex;flex-wrap: wrap;justify-content: center">
+        <h1>Ընտրեք ալգորիթմի տեսակը</h1>
+        <div style="text-align: center">
+          <button type="button" (click)="bubbleSortOnClick()" class="button7">Պղպջակների մեթոդ</button>
+          <button type="button" (click)="insertionSortOnClick()" class="button7">Տեղադրման մեթոդ</button>
+          <button type="button" (click)="quickSortOnClick()" class="button7">Արագ կարգավորման մեթոդ</button>
+        </div>
+      </div>
+      <app-linear-search *ngIf="linearSearchIsClicked"></app-linear-search>
+      <app-binary-search *ngIf="binarySearchIsClicked"></app-binary-search>
+      <app-bubble-sort *ngIf="bubbleSortIsClicked"></app-bubble-sort>
+      <app-insertion-sort *ngIf="insertionSortIsClicked"></app-insertion-sort>
+      <app-quicksortt *ngIf="quicksortIsClicked"></app-quicksortt>
+    </div>
+
+  </div>
+</div>
+

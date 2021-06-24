@@ -1,0 +1,55 @@
+<h1 style="text-align: center;">Երկուական որոնում</h1>
+<div class="inputs" *ngIf="!newValuesIsVisible">
+  <div class="input-and-label">
+    <label class="label">Բազմություն</label>
+    <input type="text" [(ngModel)]="numbersString" class="input">
+  </div>
+  <div class="input-and-label">
+    <label class="label">Որոնելի թիվ</label>
+    <input type="text" [(ngModel)]="number" class="input">
+  </div>
+  <button type="button"
+          (click)="saveOnClick()"
+          class="button7"> Տեսնել </button>
+</div>
+
+<div class="inputs" *ngIf="newValuesIsVisible" >
+  <button type="button"
+          (click)="newValuesIsClicked()"
+          class="button7"> Մուտքագրել նոր բազմություն </button>
+</div>
+
+<div class="inputs" *ngIf="newValuesIsVisible" >
+  <h2>{{number}}</h2>
+</div>
+<div class="array-and-button">
+  <div class="array-main">
+    <div *ngFor="let item of array; let idx = index">
+      <div class="array-child"
+           [ngClass]="currentIndex===idx && finishedIndex !== idx?'red':finishedIndex === idx?'green':''">
+        <span>{{item}}</span>
+      </div>
+      <div style="text-align: center; font-size: 14px; color: gray;">
+        <span>{{idx}}</span>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="numberNotFound"
+       class="finish"
+       style="color: red; margin-bottom: 7px">
+    <span > մուտքագրված թիվը բազմության մեջ չկա։ </span>
+  </div>
+  <button type="button"
+          (click)="startOnClick()"
+          *ngIf="!finished && saveIsClicked"
+          class="button7"> {{currentIndex===-1?'Սկսել':'Հաջորդ քայլ'}} </button>
+  <div *ngIf="finished" class="finish-and-restart">
+    <span class="finish" *ngIf="!numberNotFound"> Ավարտ </span>
+    <span class="finish" *ngIf="!numberNotFound"> Քայլերի քանակ՝ {{stepsCount}}</span>
+    <button (click)="restartOnClick()"
+            class="button7">Սկսել նորից</button>
+
+  </div>
+
+  <p style="text-align: center;">Երկուական որոնման ալգորիթմի ամենագլխավոր նախապայմանն է բազմության <strong>կարգավորված</strong> լինելը, հակառակ դեպքում այս ալգորիթմը չի աշխատի սպասվածի պես։ Այս ալգորիթմը բազմության էլեմենտներից գտնում է մեջտեղում գտնվող թիվը և համեմատում, արդյոք որոնելի թիվը մեծ է մեջտեղում գտնվող թվից, եթե այո ապա որոնումը շարունակվում է մեջտեղի թվից աջ հատվածում։ Իսկ եթե որոնելի թիվը փոքր է մեջտեղի թվից ապա որոնումը շարունակվում է մեջտեղի թվից ձախ հատվածում։ Գործողությունը կրկնվում է այնքան ժամանակ քանի դեռ որոնելի թիվը և մեջտեղի թիվը չեն համընկնում։</p>
+</div>
